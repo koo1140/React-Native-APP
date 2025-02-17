@@ -13,6 +13,7 @@ const TicTacToe = () => {
     setIsX(!isX);
   };
 
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tic-Tac-Toe</Text>
