@@ -12,18 +12,23 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Setup Java and Android SDK
         uses: android-actions/setup-android@v3
+
+      - name: Give Gradle permissions
+        run: chmod +x android/gradlew
 
       - name: Build APK
         run: |
