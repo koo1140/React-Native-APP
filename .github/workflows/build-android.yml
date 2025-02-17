@@ -27,20 +27,19 @@ jobs:
       - name: Setup Java and Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Give Gradle permissions
+      - name: Fix Gradle Permissions
         run: |
           cd android
-           ./gradlew wrapper
-          chmod +x android/gradlew
-        
+          chmod +x gradlew
+          ls -l gradlew # Verifică permisiunile
+
+      - name: Generate Gradle Wrapper (Dacă lipsește)
+        run: |
+          cd android
+          ./gradlew wrapper
+        continue-on-error: true # Evită oprirea dacă dă eroare
 
       - name: Build APK
         run: |
           cd android
           ./gradlew assembleRelease
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: tic-tac-toe-apk
-          path: android/app/build/outputs/apk/release/app-release.apk
