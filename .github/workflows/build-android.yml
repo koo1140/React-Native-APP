@@ -28,7 +28,11 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Give Gradle permissions
-        run: chmod +x android/gradlew
+        run: |
+          cd android
+           ./gradlew wrapper
+          chmod +x android/gradlew
+        
 
       - name: Build APK
         run: |
